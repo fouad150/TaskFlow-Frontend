@@ -1,0 +1,32 @@
+
+<form class="container" style="width:447px;margin-top:25px;margin-bottom: 25px">
+  <div class="mb-3">
+    <label class="form-label">Code:</label>
+    <input class="form-control" name="code"  [(ngModel)]="competition.code">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Date:</label>
+    <input type="date" class="form-control" name="date" [(ngModel)]="competition.date">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Start Time:</label>
+    <input type="time" class="form-control" name="startTime" [(ngModel)]="competition.startTime">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">End Time:</label>
+    <input type="time" class="form-control" name="endTime" [(ngModel)]="competition.endTime">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Number of Participants:</label>
+    <input class="form-control" name="number" [(ngModel)]="competition.numberOfParticipants">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Location:</label>
+    <input class="form-control" name="location" [(ngModel)]="competition.location">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Amount:</label>
+    <input class="form-control" name="amount" [(ngModel)]="competition.amount">
+  </div>
+  <button class="btn btn-primary" (click)="create()">Save Competition</button>
+</form>

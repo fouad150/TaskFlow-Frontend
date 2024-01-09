@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Competitions</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <style>
+    .bcontent {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container bcontent mt-4 d-flex flex-wrap justify-content-between" >
+
+<!--
+  <div class="card mb-3" *ngFor="let competition of competitions" style="width: 520px;">
+-->
+  <div class="card mb-3"  *ngFor="let competition of getDisplayedCompetitions()" style="width: 520px;">
+
+    <div class="row no-gutters">
+      <div class="col-sm-5">
+        <img class="card-img pt-3 pb-3 ps-3" height=" 332px" src="https://www.thescarboroughnews.co.uk/webimg/T0FLMTQwMjY0NTg5.jpg?width=1200&enable=upscaleg" alt="Suresh Dasari Card">
+      </div>
+      <div class="col-sm-7">
+        <div class="card-body" style="font-size:small">
+          <h5 class="card-title">{{competition.location}}</h5>
+          <p class="card-text"><strong>date: </strong>{{competition.date}}</p>
+          <p class="card-text"><strong>start time: </strong>{{competition.startTime}}</p>
+          <p class="card-text"><strong>end time: </strong>{{competition.endTime}}</p>
+          <p class="card-text"><strong>participants: </strong>{{competition.numberOfParticipants}}</p>
+          <p class="card-text"><strong>price: </strong>{{competition.amount}} DH</p>
+          <p class="card-text"><strong>status: </strong>{{competition.status}}</p>
+          <div>
+            <a [routerLink]="['/AddMember']" [queryParams]="{ id:competition.id }" class="btn btn-primary mb-1" style="display:block;font-size:small">Add member</a>
+            <a [routerLink]="['/CompetitionMembers']" [queryParams]="{ id:competition.id }" class="btn btn-warning mb-1" style="display:block;color:white;font-size:small">Competition members</a>
+            <a [routerLink]="['/Result']" [queryParams]="{ id:competition.id }" class="btn btn-info" style="display:block;font-size:small">Rank</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button class="btn btn-outline-primary me-2 mb-4" *ngFor="let page of pageArray" (click)="goToPage(page)">page: {{ page }}</button>
+  </div>
+
+</div>
+</body>
+</html>
