@@ -1,51 +1,27 @@
 import { Component } from '@angular/core';
-import {Competition} from "../../../../core/models/Competition";
-import {CompetitionService} from "../../service/competition.service";
+import { Store } from '@ngrx/store';
+import {TaskService} from "../task.service";
+import {selectAllTasks} from "../../store/task/task.selectors";
+import { AppState } from '../../store/app.state';
+import * as TaskActions from '../../store/task/task.actions';
+import { Task } from 'src/app/Entity/Task';
 
 @Component({
-  selector: 'app-list-competition',
-  templateUrl: './list-competition.component.html',
-  styleUrls: ['./list-competition.component.css']
+  selector: 'app-task-list',
+  templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.css']
 })
-export class ListCompetitionComponent {
-  competitions:Competition[]=[];
-  currentPage: number = 1;
-  itemsPerPage: number = 4;
-  totalItems: number=0;//
-  totalPages: number=0;//
-  pageArray: number[]=[];
+export class TaskListComponent {
+  tasks$ = this.store.select(selectAllTasks);
 
-  constructor(private competitionService:CompetitionService) {
-  }
+  constructor(private store: Store<AppState>,private taskService:TaskService) {}
 
   ngOnInit() {
-    this.fetchCompetitions();
+    console.log("the data exists");
+    this.store.dispatch(TaskActions.loadTasks());
+/*
+    this.taskService.getTasks().subscribe((data:Task[])=>console.log(data));
+*/
   }
 
-  fetchCompetitions(): void {
-    this.competitionService.getCompetitions().subscribe(
-      (data: Competition[]) => {
-        this.competitions = data;
-        this.totalItems = this.competitions.length;//6
-        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);//2
-        this.pageArray = Array(this.totalPages).fill(0).map((x, i) => i + 1);
-        console.log(this.pageArray);
-      },
-      (error) => {
-        console.error('Error fetching competitions:', error);
-      }
-    );
-  }
-
-  getDisplayedCompetitions(): Competition[] {
-    const startIndex = (this.currentPage- 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.competitions.slice(startIndex, endIndex);
-  }
-
-  goToPage(pageNumber: number): void {
-    if (pageNumber >= 1 && pageNumber <= this.totalPages) {
-      this.currentPage = pageNumber;
-    }
-  }
 }

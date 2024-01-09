@@ -1,3 +1,4 @@
+import {Tag} from "../Entity/Tag";
 export class TaskDTO{
   startDateTime  : string;
   endDateTime: Date;

@@ -1,39 +1,37 @@
 import { Injectable } from '@angular/core';
-import {ApiService} from "../../../core/service/api.service";
-import {Observable} from "rxjs";
-import {Fish} from "../../../core/models/Fish";
-import {Competition} from "../../../core/models/Competition";
+import {Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import { Task } from '../Entity/Task';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CompetitionService {
-/*
-  constructor(private apiService: ApiService) { }*/
+export class TaskService {
 
-
-  /*create(competition: Competition): Observable<Competition> {
-    return this.apiService.post<Competition>('/api/competitions', competition);
-  }*/
-
-
-  private baseUrl = "http://localhost:8080/api/competitions";
+  private baseUrl = "http://localhost:8080/api/v1/tasks";
 
   constructor(private http: HttpClient) { }
+  task1 = new Task(1, '2022-01-01', new Date(), 'Task 1', 'Description 1', []);
+  task2 = new Task(2, '2022-01-02', new Date(), 'Task 2', 'Description 2', []);
+  task3 = new Task(3, '2022-01-03', new Date(), 'Task 3', 'Description 3', []);
 
-  getCompetitions(): Observable<Competition[]>{
-    return this.http.get<Competition[]>(`${this.baseUrl}`);
+  tasks:Task[] = [this.task1, this.task2, this.task3];
+
+  getTasks(): Observable<Task[]>{
+/*
+    return this.http.get<Task[]>(`${this.baseUrl}`);
+*/
+    return of(this.tasks);
   }
-  create(competition: Competition): Observable<Competition> {
-    return this.http.post<Competition>(`${this.baseUrl}`, competition);
+  create(task: Task): Observable<Task> {
+    return this.http.post<Task>(`${this.baseUrl}`, task);
   }
 
-  updateCompetition(competition: Competition): Observable<Competition> {
-    return this.http.put<Competition>(`${this.baseUrl}/${competition.id}`, competition);
+  updateCompetition(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.baseUrl}/${task.id}`, task);
   }
-  deleteCompetition(competitionId: number): Observable<any>{
-    return this.http.delete(`${this.baseUrl}/${competitionId}`);
+  deleteCompetition(taskId: number): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${taskId}`);
   }
 
 

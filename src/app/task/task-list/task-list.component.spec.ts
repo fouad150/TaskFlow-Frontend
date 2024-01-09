@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListCompetitionComponent } from './list-competition.component';
+import { ListCompetitionComponent } from './task-list.component';
 
 describe('ListCompetitionComponent', () => {
   let component: ListCompetitionComponent;
